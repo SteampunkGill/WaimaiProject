@@ -26,5 +26,7 @@ public class OrderVO {
     private Integer estimatedMinutes;
     private LocalDateTime payTime;
     private LocalDateTime createTime;
+    private Integer isJointDelivery;
+    private JointDeliveryGroupVO jointDelivery;
     private List<OrderDetailVO> details;
 }

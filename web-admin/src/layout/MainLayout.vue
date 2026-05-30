@@ -14,7 +14,7 @@ const menuItems = [
   { path: '/rider/audit', title: '骑手审核', icon: 'UserFilled' },
   { path: '/order/monitor', title: '订单监控', icon: 'List' },
   { path: '/order/overtime', title: '超时监控', icon: 'Clock' },
-  { path: '/delivery/batch', title: '协同配送', icon: 'Connection' },
+  { path: '/delivery/joint', title: '联合配送', icon: 'Connection' },
   { path: '/coupon/manage', title: '优惠券管理', icon: 'Ticket' },
   { path: '/dispute/manage', title: '纠纷处理', icon: 'Warning' },
   { path: '/system/config', title: '系统配置', icon: 'Setting' },

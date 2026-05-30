@@ -3,10 +3,10 @@ com\waimai\api\controller\MerchantController.class
 com\waimai\api\controller\ReviewController.class
 com\waimai\api\controller\CategoryController.class
 com\waimai\api\config\RedisConfig.class
+com\waimai\api\config\DataEncodingFixer.class
 com\waimai\api\controller\AdminController.class
 com\waimai\api\controller\AuthController.class
 com\waimai\api\WaimaiApplication.class
-com\waimai\api\controller\DeliveryBatchController.class
 com\waimai\api\controller\DisputeController.class
 com\waimai\api\interceptor\LoginInterceptor.class
 com\waimai\api\controller\DishController.class
@@ -24,4 +24,5 @@ com\waimai\api\filter\XssFilter.class
 com\waimai\api\annotation\RateLimit.class
 com\waimai\api\filter\XssFilter$XssRequestWrapper.class
 com\waimai\api\controller\SystemConfigController.class
+com\waimai\api\controller\JointDeliveryController.class
 com\waimai\api\config\RestTemplateConfig.class

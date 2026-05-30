@@ -117,6 +117,9 @@ public class RiderServiceImpl extends ServiceImpl<RiderMapper, Rider> implements
         }
         Order order = orderMapper.selectById(orderId);
         if (order == null) throw new BusinessException("订单不存在");
+        if (order.getIsJointDelivery() != null && order.getIsJointDelivery() == 1) {
+            throw new BusinessException("该订单为联合配送订单，请在联合配送页面操作");
+        }
         if (!OrderStatus.PREPARING.equals(order.getStatus())) {
             throw new BusinessException("订单已被其他骑手接单");
         }

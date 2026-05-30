@@ -12,7 +12,13 @@
       "Bash(mvn compile *)",
       "Bash(npx vue-tsc *)",
       "WebFetch(domain:lbs.amap.com)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(mvn clean *)",
+      "Bash(mysql -u root -p123456 waimai -e \"SELECT id, openid, real_name, phone, audit_status, status FROM rider LIMIT 10;\")",
+      "Bash(mysql -u root -p123456 waimai -e \"SELECT id, order_no, status, merchant_id, rider_id, is_joint_delivery, address FROM \\\\`order\\\\` WHERE status='PREPARING' AND \\(is_joint_delivery IS NULL OR is_joint_delivery = 0\\) LIMIT 5;\")",
+      "Bash(mysql -u root -p123456 waimai -e \"SELECT id, order_no, status, merchant_id, is_joint_delivery, address FROM \\\\`order\\\\` ORDER BY id DESC LIMIT 5;\")",
+      "Bash(mysql -u root -p123456 waimai -e \"SELECT * FROM joint_delivery_group; SELECT * FROM joint_delivery_member;\")",
+      "Bash(mysql *)"
     ]
   }
 }

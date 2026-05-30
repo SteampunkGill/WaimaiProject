@@ -28,6 +28,7 @@ public class Order {
     private LocalDateTime completeTime;
     private Integer estimatedMinutes;
     private Integer isOvertime;
+    private Integer isJointDelivery;
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     @TableField(fill = FieldFill.INSERT_UPDATE)

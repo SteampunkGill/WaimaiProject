@@ -3,6 +3,8 @@ package com.waimai.api.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.waimai.common.Result;
 import com.waimai.common.dto.PlaceOrderDTO;
+import com.waimai.common.entity.JointDeliveryGroup;
+import com.waimai.common.entity.JointDeliveryMember;
 import com.waimai.common.entity.Order;
 import com.waimai.common.entity.OrderDetail;
 import com.waimai.common.utils.UserContext;
@@ -11,6 +13,9 @@ import com.waimai.common.vo.OrderVO;
 import com.waimai.service.mapper.OrderDetailMapper;
 import com.waimai.service.service.MerchantService;
 import com.waimai.common.dto.OrderItemDTO;
+import com.waimai.common.vo.JointDeliveryGroupVO;
+import com.waimai.common.vo.JointDeliveryMemberVO;
+import com.waimai.service.service.JointDeliveryService;
 import com.waimai.service.service.OrderService;
 import com.waimai.service.service.DispatchService;
 import com.waimai.service.service.PaymentService;
@@ -35,16 +40,19 @@ public class OrderController {
     private final PaymentService paymentService;
     private final DispatchService dispatchService;
     private final RiderService riderService;
+    private final JointDeliveryService jointDeliveryService;
 
     public OrderController(OrderService orderService, OrderDetailMapper orderDetailMapper,
                            MerchantService merchantService, PaymentService paymentService,
-                           DispatchService dispatchService, RiderService riderService) {
+                           DispatchService dispatchService, RiderService riderService,
+                           JointDeliveryService jointDeliveryService) {
         this.orderService = orderService;
         this.orderDetailMapper = orderDetailMapper;
         this.merchantService = merchantService;
         this.paymentService = paymentService;
         this.dispatchService = dispatchService;
         this.riderService = riderService;
+        this.jointDeliveryService = jointDeliveryService;
     }
 
     @PostMapping("/place")
@@ -135,8 +143,45 @@ public class OrderController {
         vo.setEstimatedMinutes(order.getEstimatedMinutes());
         vo.setMerchantId(order.getMerchantId());
         vo.setRiderId(order.getRiderId());
+        vo.setIsJointDelivery(order.getIsJointDelivery());
         vo.setPayTime(order.getPayTime());
         vo.setCreateTime(order.getCreateTime());
+
+        if (order.getIsJointDelivery() != null && order.getIsJointDelivery() == 1) {
+            JointDeliveryGroup group = jointDeliveryService.getByOrderId(order.getId());
+            if (group != null) {
+                JointDeliveryGroupVO gvo = new JointDeliveryGroupVO();
+                gvo.setId(group.getId());
+                gvo.setGroupNo(group.getGroupNo());
+                gvo.setRequiredRiderCount(group.getRequiredRiderCount());
+                gvo.setJoinedRiderCount(group.getJoinedRiderCount());
+                gvo.setCompletedRiderCount(group.getCompletedRiderCount());
+                gvo.setStatus(group.getStatus());
+                gvo.setDeliveryFeeTotal(group.getDeliveryFeeTotal());
+                gvo.setCreateTime(group.getCreateTime());
+
+                List<JointDeliveryMember> members = jointDeliveryService.listMembersByGroup(group.getId());
+                List<JointDeliveryMemberVO> mvos = new java.util.ArrayList<>();
+                for (JointDeliveryMember m : members) {
+                    JointDeliveryMemberVO mv = new JointDeliveryMemberVO();
+                    mv.setId(m.getId());
+                    mv.setRiderId(m.getRiderId());
+                    mv.setStatus(m.getStatus());
+                    mv.setEarnings(m.getEarnings());
+                    mv.setJoinTime(m.getJoinTime());
+                    mv.setPickupTime(m.getPickupTime());
+                    mv.setCompleteTime(m.getCompleteTime());
+                    com.waimai.common.entity.Rider rider = riderService.getById(m.getRiderId());
+                    if (rider != null) {
+                        mv.setRiderName(rider.getRealName());
+                        mv.setRiderPhone(rider.getPhone());
+                    }
+                    mvos.add(mv);
+                }
+                gvo.setMembers(mvos);
+                vo.setJointDelivery(gvo);
+            }
+        }
 
         var merchant = merchantService.getById(order.getMerchantId());
         if (merchant != null) vo.setMerchantName(merchant.getName());

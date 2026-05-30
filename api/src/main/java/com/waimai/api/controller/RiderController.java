@@ -106,6 +106,7 @@ public class RiderController {
         List<Order> list = orderMapper.selectList(new LambdaQueryWrapper<Order>()
                 .eq(Order::getStatus, OrderStatus.PREPARING)
                 .isNull(Order::getRiderId)
+                .and(w -> w.isNull(Order::getIsJointDelivery).or().eq(Order::getIsJointDelivery, 0))
                 .orderByDesc(Order::getCreateTime));
         return Result.ok(list);
     }

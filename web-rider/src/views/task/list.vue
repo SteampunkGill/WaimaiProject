@@ -58,8 +58,8 @@ function goTrack(order: any) {
   router.push(`/track/${order.orderNo}`)
 }
 
-function goSubtasks() {
-  router.push('/subtasks')
+function goJoint() {
+  router.push('/joint')
 }
 
 onMounted(fetch)
@@ -85,7 +85,7 @@ onMounted(fetch)
     </div>
 
     <div class="quick-links">
-      <van-button size="small" plain type="primary" @click="goSubtasks">协同配送任务</van-button>
+      <van-button size="small" plain type="primary" @click="goJoint">联合配送任务</van-button>
     </div>
 
     <van-tabs v-model:active="tab">

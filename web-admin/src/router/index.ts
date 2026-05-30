@@ -69,10 +69,10 @@ const router = createRouter({
           meta: { title: '超时监控', icon: 'Clock' }
         },
         {
-          path: 'delivery/batch',
-          name: 'DeliveryBatch',
-          component: () => import('@/views/delivery/batch.vue'),
-          meta: { title: '协同配送', icon: 'Connection' }
+          path: 'delivery/joint',
+          name: 'JointDelivery',
+          component: () => import('@/views/delivery/joint.vue'),
+          meta: { title: '联合配送', icon: 'Connection' }
         }
       ]
     }

@@ -1,3 +1,4 @@
+C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\controller\JointDeliveryController.java
 C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\WaimaiApplication.java
 C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\config\DataEncodingFixer.java
 C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\config\RedisConfig.java
@@ -12,7 +13,6 @@ C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery pla
 C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\controller\AuthController.java
 C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\interceptor\LoginInterceptor.java
 C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\controller\CouponController.java
-C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\controller\DeliveryBatchController.java
 C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\controller\ReviewController.java
 C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\config\WebMvcConfig.java
 C:\Users\11465\Desktop\作业 杂项\springboot\项目\IdeaProjects\delivery platform\waimai-backend\api\src\main\java\com\waimai\api\controller\UserController.java

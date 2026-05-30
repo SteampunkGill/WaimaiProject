@@ -3,6 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/database.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/migration_rider_audit.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/migration_v10_joint_delivery.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/migration_v2_audit_fields.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/migration_v9_user_address.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/test_data_init.sql" dialect="MySQL" />

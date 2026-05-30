@@ -12,7 +12,7 @@ const showReview = ref(false)
 
 const statusMap: any = {
   PENDING_PAYMENT: '待支付', PAID: '已支付', PREPARING: '备餐中',
-  DELIVERING: '配送中', COMPLETED: '已完成', CANCELLED: '已取消'
+  ACCEPTED: '已接单', DELIVERING: '配送中', COMPLETED: '已完成', CANCELLED: '已取消'
 }
 
 const statusStep = computed(() => {
@@ -20,8 +20,9 @@ const statusStep = computed(() => {
   if (s === 'PENDING_PAYMENT') return 0
   if (s === 'PAID') return 1
   if (s === 'PREPARING') return 2
-  if (s === 'DELIVERING') return 3
-  if (s === 'COMPLETED') return 4
+  if (s === 'ACCEPTED') return 3
+  if (s === 'DELIVERING') return 4
+  if (s === 'COMPLETED') return 5
   return -1
 })
 
@@ -69,6 +70,7 @@ onMounted(fetch)
         <van-step>已下单</van-step>
         <van-step>已支付</van-step>
         <van-step>备餐中</van-step>
+        <van-step>已接单</van-step>
         <van-step>配送中</van-step>
         <van-step>已完成</van-step>
       </van-steps>
@@ -116,6 +118,16 @@ onMounted(fetch)
       </van-cell>
     </van-cell-group>
 
+    <van-cell-group v-if="order.isJointDelivery && order.jointDelivery" inset title="联合配送">
+      <van-cell title="配送骑手" :value="`${order.jointDelivery.joinedRiderCount}/${order.jointDelivery.requiredRiderCount}`" />
+      <div v-for="m in order.jointDelivery.members" :key="m.id" class="joint-rider-row">
+        <span class="joint-rider-name">{{ m.riderName || '骑手#' + m.riderId }}</span>
+        <van-tag :type="m.status === 'COMPLETED' ? 'success' : 'primary'" size="small">
+          {{ m.status === 'INVITED' ? '已邀请' : m.status === 'JOINED' ? '已加入' : m.status === 'PICKED_UP' ? '已取餐' : m.status === 'COMPLETED' ? '已完成' : m.status }}
+        </van-tag>
+      </div>
+    </van-cell-group>
+
     <van-cell-group v-if="order.payTime" inset title="时间信息">
       <van-cell title="支付时间" :value="order.payTime?.substring(0, 16)" />
       <van-cell title="下单时间" :value="order.createTime?.substring(0, 16)" />
@@ -160,6 +172,9 @@ onMounted(fetch)
 .pay-amount { color: #ee0a24; font-weight: 700; font-size: 16px; }
 
 .actions { display: flex; gap: 10px; justify-content: flex-end; padding: 16px; }
+
+.joint-rider-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; border-top: 1px solid #f5f5f5; }
+.joint-rider-name { font-size: 13px; color: #333; }
 
 .review-form { padding: 12px 16px; }
 .review-card { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; }

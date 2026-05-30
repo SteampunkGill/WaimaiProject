@@ -1,7 +1,9 @@
 package com.waimai.service.impl;
 
 import com.waimai.service.push.OrderPushService;
+import com.waimai.common.constant.JointDeliveryStatus;
 import com.waimai.common.constant.OrderStatus;
+import com.waimai.common.entity.JointDeliveryGroup;
 import com.waimai.common.entity.Merchant;
 import com.waimai.common.entity.Order;
 import com.waimai.common.entity.Rider;
@@ -9,6 +11,7 @@ import com.waimai.common.exception.BusinessException;
 import com.waimai.common.vo.RiderNearbyVO;
 import com.waimai.service.service.DispatchService;
 import com.waimai.service.service.GeoService;
+import com.waimai.service.service.JointDeliveryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -29,15 +32,18 @@ public class DispatchServiceImpl implements DispatchService {
     private final MerchantServiceImpl merchantService;
     private final RiderServiceImpl riderService;
     private final OrderPushService orderPushService;
+    private final JointDeliveryService jointDeliveryService;
 
     public DispatchServiceImpl(GeoService geoService, OrderServiceImpl orderService,
                                MerchantServiceImpl merchantService, RiderServiceImpl riderService,
-                               OrderPushService orderPushService) {
+                               OrderPushService orderPushService,
+                               JointDeliveryService jointDeliveryService) {
         this.geoService = geoService;
         this.orderService = orderService;
         this.merchantService = merchantService;
         this.riderService = riderService;
         this.orderPushService = orderPushService;
+        this.jointDeliveryService = jointDeliveryService;
     }
 
     @Override
@@ -46,6 +52,12 @@ public class DispatchServiceImpl implements DispatchService {
         if (order == null) throw new BusinessException("订单不存在");
         if (!OrderStatus.PREPARING.equals(order.getStatus())) {
             throw new BusinessException("订单状态不是备餐中，无需派单");
+        }
+
+        JointDeliveryGroup group = jointDeliveryService.getByOrderId(orderId);
+        if (group != null && JointDeliveryStatus.RECRUITING.equals(group.getStatus())) {
+            jointDeliveryService.dispatchJointDelivery(group.getId());
+            return null;
         }
 
         Merchant merchant = merchantService.getById(order.getMerchantId());
