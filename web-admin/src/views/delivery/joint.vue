@@ -204,5 +204,5 @@ onMounted(fetchGroups)
 <style scoped>
 .joint-page { max-width: 1400px; }
 .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.page-header h2 { margin: 0; font-size: 18px; }
+.page-header h2 { margin: 0; font-size: var(--font-size-h4); }
 </style>

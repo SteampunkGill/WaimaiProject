@@ -22,9 +22,9 @@ spring:
   # ==================== MySQL 8.x ====================
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/waimai?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://127.0.0.1:3307/waimai?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true
     username: root
-    password: 123456
+    password: your_mysql_password
     hikari:
       minimum-idle: 5
       maximum-pool-size: 20
@@ -36,7 +36,7 @@ spring:
     redis:
       host: localhost
       port: 6379
-      password:
+      password: your_redis_password
       database: 0
       lettuce:
         pool:
@@ -49,7 +49,7 @@ spring:
     host: localhost
     port: 5672
     username: guest
-    password: guest
+    password: your_rabbitmq_password
     virtual-host: /
     listener:
       simple:

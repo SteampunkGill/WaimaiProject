@@ -105,7 +105,7 @@ const breadcrumb = computed(() => {
 <style scoped>
 .layout-container {
   height: 100vh;
-  background: #f0f2f5;
+  background: var(--color-bg-page);
 }
 
 /* Sidebar */
@@ -115,7 +115,7 @@ const breadcrumb = computed(() => {
   flex-direction: column;
   overflow: hidden;
   transition: width 0.3s;
-  border-right: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid var(--color-border);
 }
 
 .logo-area {
@@ -136,9 +136,9 @@ const breadcrumb = computed(() => {
   flex-shrink: 0;
 }
 .logo-text {
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
+  font-size: var(--font-size-h5);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
   white-space: nowrap;
   letter-spacing: 1px;
 }
@@ -159,8 +159,8 @@ const breadcrumb = computed(() => {
   background: rgba(255,255,255,0.08) !important;
 }
 .side-menu .el-menu-item.is-active {
-  background: linear-gradient(135deg, #409EFF, #337ECC) !important;
-  box-shadow: 0 4px 12px rgba(64,158,255,0.3);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)) !important;
+  box-shadow: 0 4px 12px rgba(24,144,255,0.3);
 }
 :deep(.side-menu .el-menu-item.is-active .el-icon) {
   color: #fff;
@@ -176,11 +176,11 @@ const breadcrumb = computed(() => {
 .admin-avatar {
   width: 36px;
   height: 36px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #409EFF, #66B1FF);
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: var(--color-white);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,25 +192,25 @@ const breadcrumb = computed(() => {
   overflow: hidden;
 }
 .admin-name {
-  font-size: 13px;
-  color: #fff;
-  font-weight: 500;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-white);
+  font-weight: var(--font-weight-medium);
 }
 .admin-role {
-  font-size: 11px;
+  font-size: var(--font-size-caption-sm);
   color: rgba(255,255,255,0.5);
 }
 
 /* Header */
 .main-header {
-  background: #fff;
-  border-bottom: 1px solid #f0f0f0;
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 var(--spacing-lg);
   height: 56px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  box-shadow: var(--shadow-xs);
 }
 .header-left {
   display: flex;
@@ -219,14 +219,14 @@ const breadcrumb = computed(() => {
 }
 .collapse-btn {
   cursor: pointer;
-  color: #666;
+  color: var(--color-text-secondary);
   padding: 6px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   transition: all 0.2s;
 }
 .collapse-btn:hover {
-  background: #f5f5f5;
-  color: #409EFF;
+  background: var(--color-bg-hover);
+  color: var(--color-primary);
 }
 .header-right {
   display: flex;
@@ -235,20 +235,20 @@ const breadcrumb = computed(() => {
 }
 .header-icon {
   cursor: pointer;
-  color: #999;
+  color: var(--color-text-placeholder);
   padding: 6px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   transition: all 0.2s;
 }
 .header-icon:hover {
-  background: #f5f5f5;
-  color: #409EFF;
+  background: var(--color-bg-hover);
+  color: var(--color-primary);
 }
 
 /* Content */
 .main-content {
-  background: #f0f2f5;
-  padding: 20px;
+  background: var(--color-bg-page);
+  padding: var(--spacing-lg);
   min-height: 0;
 }
 

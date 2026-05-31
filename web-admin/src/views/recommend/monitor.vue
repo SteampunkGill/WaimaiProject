@@ -20,10 +20,10 @@ const stats = ref({
 const loading = ref(false)
 
 const statCards = [
-  { label: '菜品总数', key: 'totalDishes', suffix: '道', color: '#409EFF', bg: '#ECF5FF', icon: 'Dish' },
-  { label: '分类总数', key: 'totalCategories', suffix: '个', color: '#67C23A', bg: '#F0F9EB', icon: 'Grid' },
+  { label: '菜品总数', key: 'totalDishes', suffix: '道', color: '#1890FF', bg: '#E6F7FF', icon: 'Dish' },
+  { label: '分类总数', key: 'totalCategories', suffix: '个', color: '#52C41A', bg: '#F6FFED', icon: 'Grid' },
   { label: '热销菜品', key: 'hotDishes', suffix: '', color: '#FF6B35', bg: '#FFF3ED', icon: 'StarFilled', isArr: true },
-  { label: '价格区间', key: 'priceDistribution', suffix: '', color: '#E6A23C', bg: '#FDF6EC', icon: 'PriceTag', isArr: true },
+  { label: '价格区间', key: 'priceDistribution', suffix: '', color: '#FAAD14', bg: '#FFFBE6', icon: 'PriceTag', isArr: true },
 ]
 
 function formatStatVal(card: any): string {
@@ -175,28 +175,28 @@ onUnmounted(() => {
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
 }
 .stat-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
   display: flex;
   align-items: center;
-  gap: 16px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  gap: var(--spacing-base);
+  box-shadow: var(--shadow-sm);
   transition: all 0.25s;
   cursor: default;
 }
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-md);
 }
 .stat-icon-wrap {
   width: 48px;
   height: 48px;
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,29 +205,29 @@ onUnmounted(() => {
 .stat-body {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-xs);
 }
 .stat-label {
-  font-size: 13px;
-  color: #999;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-text-placeholder);
 }
 .stat-value {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
 }
 
 /* Charts */
 .charts-row {
   display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
 }
 .chart-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
   flex: 1;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  box-shadow: var(--shadow-sm);
   min-width: 0;
 }
 .chart-card--large {
@@ -241,15 +241,15 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 4px;
+  margin-bottom: var(--spacing-xs);
 }
 .chart-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
 }
 .chart-hint {
-  font-size: 11px;
-  color: #ccc;
+  font-size: var(--font-size-caption-sm);
+  color: var(--color-text-disabled);
 }
 </style>

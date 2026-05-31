@@ -21,10 +21,10 @@ const stats = ref({
 const last7Days = ref<{ date: string; count: number }[]>([])
 
 const statCards = [
-  { label: '今日订单', key: 'todayOrders', suffix: '单', color: '#409EFF', bg: '#ECF5FF', icon: 'Document' },
-  { label: '今日营收', key: 'todayRevenue', prefix: '¥', isMoney: true, color: '#67C23A', bg: '#F0F9EB', icon: 'Money' },
-  { label: '在线骑手', key: 'onlineRiders', suffix: '人', color: '#E6A23C', bg: '#FDF6EC', icon: 'UserFilled' },
-  { label: '商家总数', key: 'totalMerchants', suffix: '家', color: '#F56C6C', bg: '#FEF0F0', icon: 'Shop' },
+  { label: '今日订单', key: 'todayOrders', suffix: '单', color: '#1890FF', bg: '#E6F7FF', icon: 'Document' },
+  { label: '今日营收', key: 'todayRevenue', prefix: '¥', isMoney: true, color: '#52C41A', bg: '#F6FFED', icon: 'Money' },
+  { label: '在线骑手', key: 'onlineRiders', suffix: '人', color: '#FAAD14', bg: '#FFFBE6', icon: 'UserFilled' },
+  { label: '商家总数', key: 'totalMerchants', suffix: '家', color: '#FF4D4F', bg: '#FFF2F0', icon: 'Shop' },
 ]
 
 function formatValue(card: any): string {
@@ -75,16 +75,16 @@ function initCharts() {
         symbol: 'circle',
         symbolSize: 8,
         data: last7Days.value.map(d => d.count),
-        lineStyle: { color: '#409EFF', width: 3 },
+        lineStyle: { color: '#1890FF', width: 3 },
         itemStyle: {
-          color: '#409EFF',
+          color: '#1890FF',
           borderColor: '#fff',
           borderWidth: 2
         },
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(64,158,255,0.2)' },
-            { offset: 1, color: 'rgba(64,158,255,0.02)' }
+            { offset: 0, color: 'rgba(24,144,255,0.2)' },
+            { offset: 1, color: 'rgba(24,144,255,0.02)' }
           ])
         }
       }]
@@ -107,10 +107,10 @@ function initCharts() {
           scaleSize: 8
         },
         data: [
-          { value: 420, name: '中餐', itemStyle: { color: '#409EFF' } },
-          { value: 310, name: '西餐', itemStyle: { color: '#67C23A' } },
-          { value: 235, name: '饮品', itemStyle: { color: '#E6A23C' } },
-          { value: 180, name: '小吃', itemStyle: { color: '#F56C6C' } },
+          { value: 420, name: '中餐', itemStyle: { color: '#1890FF' } },
+          { value: 310, name: '西餐', itemStyle: { color: '#52C41A' } },
+          { value: 235, name: '饮品', itemStyle: { color: '#FAAD14' } },
+          { value: 180, name: '小吃', itemStyle: { color: '#FF4D4F' } },
           { value: 141, name: '其他', itemStyle: { color: '#909399' } }
         ]
       }]
@@ -138,12 +138,12 @@ function initCharts() {
         type: 'bar',
         barWidth: 24,
         data: [
-          { value: 28, itemStyle: { color: '#E6A23C', borderRadius: [6,6,0,0] } },
-          { value: 45, itemStyle: { color: '#409EFF', borderRadius: [6,6,0,0] } },
+          { value: 28, itemStyle: { color: '#FAAD14', borderRadius: [6,6,0,0] } },
+          { value: 45, itemStyle: { color: '#1890FF', borderRadius: [6,6,0,0] } },
           { value: 32, itemStyle: { color: '#909399', borderRadius: [6,6,0,0] } },
-          { value: 18, itemStyle: { color: '#67C23A', borderRadius: [6,6,0,0] } },
-          { value: 156, itemStyle: { color: '#67C23A', borderRadius: [6,6,0,0] } },
-          { value: 12, itemStyle: { color: '#F56C6C', borderRadius: [6,6,0,0] } }
+          { value: 18, itemStyle: { color: '#52C41A', borderRadius: [6,6,0,0] } },
+          { value: 156, itemStyle: { color: '#52C41A', borderRadius: [6,6,0,0] } },
+          { value: 12, itemStyle: { color: '#FF4D4F', borderRadius: [6,6,0,0] } }
         ]
       }]
     })
@@ -216,28 +216,28 @@ onUnmounted(() => {
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
 }
 .stat-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
   display: flex;
   align-items: center;
-  gap: 16px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  gap: var(--spacing-base);
+  box-shadow: var(--shadow-sm);
   transition: all 0.25s;
   cursor: default;
 }
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-md);
 }
 .stat-icon-wrap {
   width: 50px;
   height: 50px;
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,29 +246,29 @@ onUnmounted(() => {
 .stat-body {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-xs);
 }
 .stat-label {
-  font-size: 13px;
-  color: #999;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-text-placeholder);
 }
 .stat-value {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
 }
 
 /* Charts */
 .charts-row {
   display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
 }
 .chart-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
   flex: 1;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  box-shadow: var(--shadow-sm);
   min-width: 0;
 }
 .chart-card--large {
@@ -282,16 +282,16 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: var(--spacing-sm);
 }
 .chart-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
 }
 .chart-subtitle {
-  font-size: 11px;
-  color: #ccc;
+  font-size: var(--font-size-caption-sm);
+  color: var(--color-text-disabled);
 }
 .chart-body {
   height: 340px;

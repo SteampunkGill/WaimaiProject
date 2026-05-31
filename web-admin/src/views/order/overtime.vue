@@ -50,6 +50,6 @@ onUnmounted(() => {
 <style scoped>
 .overtime-page { max-width: 1200px; }
 .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.page-header h2 { margin: 0; font-size: 18px; }
-.refresh-hint { font-size: 12px; color: #ccc; }
+.page-header h2 { margin: 0; font-size: var(--font-size-h4); }
+.refresh-hint { font-size: var(--font-size-caption); color: var(--color-text-disabled); }
 </style>

@@ -153,14 +153,14 @@ async function handleLogin() {
   margin-bottom: 20px;
 }
 .brand-title {
-  font-size: 28px;
-  color: #fff;
-  font-weight: 700;
+  font-size: var(--font-size-h1);
+  color: var(--color-white);
+  font-weight: var(--font-weight-bold);
   margin: 0 0 12px;
   letter-spacing: 2px;
 }
 .brand-desc {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   color: rgba(255,255,255,0.6);
   margin: 0 0 48px;
 }
@@ -190,11 +190,11 @@ async function handleLogin() {
   backdrop-filter: blur(10px);
 }
 .bf-title {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
 }
 .bf-sub {
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   color: rgba(255,255,255,0.55);
   margin-top: 2px;
 }
@@ -216,51 +216,51 @@ async function handleLogin() {
   margin-bottom: 32px;
 }
 .login-header h2 {
-  font-size: 24px;
-  color: #1a1a1a;
-  margin: 0 0 8px;
-  font-weight: 700;
+  font-size: var(--font-size-h2);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-sm);
+  font-weight: var(--font-weight-bold);
 }
 .login-header p {
-  font-size: 14px;
-  color: #999;
+  font-size: var(--font-size-body);
+  color: var(--color-text-placeholder);
   margin: 0;
 }
 
 .login-form :deep(.el-input__wrapper) {
   border-radius: 10px;
   box-shadow: none;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--color-border-dark);
   transition: all 0.2s;
   padding: 4px 12px;
 }
 .login-form :deep(.el-input__wrapper:hover) {
-  border-color: #409EFF;
+  border-color: var(--color-primary);
 }
 .login-form :deep(.el-input__wrapper.is-focus) {
-  border-color: #409EFF;
-  box-shadow: 0 0 0 3px rgba(64,158,255,0.08);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(24,144,255,0.08);
 }
 
 .login-btn {
   width: 100%;
   height: 46px;
   border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--font-size-h5);
+  font-weight: var(--font-weight-semibold);
   letter-spacing: 4px;
-  background: linear-gradient(135deg, #409EFF, #337ECC);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
   border: none;
 }
 .login-btn:hover {
-  background: linear-gradient(135deg, #66B1FF, #409EFF);
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
 }
 
 .login-footer {
   text-align: center;
 }
 .demo-hint {
-  font-size: 12px;
-  color: #ccc;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-disabled);
 }
 </style>

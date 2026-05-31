@@ -12,12 +12,12 @@ const filterStatus = ref('')
 let timer: ReturnType<typeof setInterval> | null = null
 
 const statusMap: Record<string, { text: string; type: string; color: string }> = {
-  PENDING_PAYMENT: { text: '待支付', type: 'warning', color: '#E6A23C' },
-  PAID: { text: '已支付', type: 'primary', color: '#409EFF' },
+  PENDING_PAYMENT: { text: '待支付', type: 'warning', color: '#FAAD14' },
+  PAID: { text: '已支付', type: 'primary', color: '#1890FF' },
   PREPARING: { text: '备餐中', type: 'info', color: '#909399' },
-  DELIVERING: { text: '配送中', type: '', color: '#67C23A' },
-  COMPLETED: { text: '已完成', type: 'success', color: '#67C23A' },
-  CANCELLED: { text: '已取消', type: 'danger', color: '#F56C6C' }
+  DELIVERING: { text: '配送中', type: '', color: '#52C41A' },
+  COMPLETED: { text: '已完成', type: 'success', color: '#52C41A' },
+  CANCELLED: { text: '已取消', type: 'danger', color: '#FF4D4F' }
 }
 
 const statsRow = computed(() => {
@@ -155,20 +155,20 @@ onUnmounted(() => {
   flex-wrap: wrap;
 }
 .qs-item {
-  background: #fff;
-  border-radius: 12px;
-  padding: 10px 16px;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-base);
+  padding: var(--spacing-md) var(--spacing-base);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-sm);
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  box-shadow: var(--shadow-sm);
   user-select: none;
 }
 .qs-item:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-md);
 }
 .qs-dot {
   width: 8px;
@@ -177,8 +177,8 @@ onUnmounted(() => {
   flex-shrink: 0;
 }
 .qs-label {
-  font-size: 13px;
-  color: #666;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-text-secondary);
 }
 .qs-count {
   font-size: 18px;
@@ -189,10 +189,10 @@ onUnmounted(() => {
 
 /* Card */
 .page-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .table-header {
@@ -205,14 +205,14 @@ onUnmounted(() => {
   display: flex;
   align-items: baseline;
   gap: 10px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
 }
 .table-total {
-  font-size: 13px;
-  font-weight: 400;
-  color: #999;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-placeholder);
 }
 .table-actions {
   display: flex;
@@ -220,15 +220,15 @@ onUnmounted(() => {
 }
 
 .order-table :deep(.el-table__header th) {
-  background: #fafafa;
-  color: #666;
-  font-weight: 600;
+  background: var(--color-bg-stripe);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
 }
 
 .pay-amount {
-  font-weight: 700;
-  color: #F56C6C;
-  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-danger);
+  font-size: var(--font-size-body);
 }
 
 .pagination-wrap {

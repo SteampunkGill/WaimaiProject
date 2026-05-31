@@ -9,10 +9,20 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result<?> handleTypeMismatch(MethodArgumentTypeMismatchException e) {
+        log.warn("Type mismatch: param={}, value={}, requiredType={}",
+                e.getName(), e.getValue(),
+                e.getRequiredType() != null ? e.getRequiredType().getSimpleName() : "unknown");
+        return Result.fail(400, "参数类型错误: " + e.getName() + " 应为数字类型");
+    }
 
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

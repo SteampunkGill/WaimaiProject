@@ -1,3 +1,4 @@
+com\waimai\api\config\WebMvcConfig$1.class
 com\waimai\api\config\WebMvcConfig.class
 com\waimai\api\controller\MerchantController.class
 com\waimai\api\controller\ReviewController.class
@@ -26,3 +27,4 @@ com\waimai\api\filter\XssFilter$XssRequestWrapper.class
 com\waimai\api\controller\SystemConfigController.class
 com\waimai\api\controller\JointDeliveryController.class
 com\waimai\api\config\RestTemplateConfig.class
+com\waimai\api\config\WebMvcConfig$2.class

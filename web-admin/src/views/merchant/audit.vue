@@ -111,8 +111,8 @@ onMounted(fetchMerchants)
 </template>
 
 <style scoped>
-.page-card { background: #fff; border-radius: 14px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.page-card { background: var(--color-bg-card); border-radius: var(--radius-lg); padding: var(--spacing-lg); box-shadow: var(--shadow-sm); }
 .summary-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-.audit-table :deep(.el-table__header th) { background: #fafafa; color: #666; font-weight: 600; }
+.audit-table :deep(.el-table__header th) { background: var(--color-bg-stripe); color: var(--color-text-secondary); font-weight: var(--font-weight-semibold); }
 .action-btns { display: flex; gap: 6px; align-items: center; }
 </style>
