@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.waimai.common.constant.MerchantStatus;
 import com.waimai.common.entity.Merchant;
 import com.waimai.common.exception.BusinessException;
+import com.waimai.common.utils.BCryptUtil;
 import com.waimai.service.mapper.MerchantMapper;
 import com.waimai.service.service.MerchantService;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +30,40 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
     }
 
     @Override
+    public Merchant getByPhone(String phone) {
+        return lambdaQuery().eq(Merchant::getPhone, phone).one();
+    }
+
+    @Override
+    public Merchant loginByPassword(String phone, String password) {
+        Merchant merchant = getByPhone(phone);
+        if (merchant == null) {
+            throw new BusinessException("手机号未注册，请先申请入驻");
+        }
+        if (merchant.getPassword() == null || !BCryptUtil.checkPassword(password, merchant.getPassword())) {
+            throw new BusinessException("密码错误");
+        }
+        if (merchant.getStatus() == MerchantStatus.PENDING) {
+            throw new BusinessException("商家正在审核中，请耐心等待");
+        }
+        if (merchant.getStatus() == MerchantStatus.REJECTED) {
+            throw new BusinessException("商家入驻申请已被驳回，请联系平台");
+        }
+        if (merchant.getStatus() == MerchantStatus.DISABLED) {
+            throw new BusinessException("商家已被停用，请联系平台");
+        }
+        return merchant;
+    }
+
+    @Override
     public Merchant apply(Merchant merchant) {
         Merchant exist = getByOpenid(merchant.getOpenid());
         if (exist != null && exist.getStatus() != MerchantStatus.REJECTED) {
             throw new BusinessException("您已申请过，请勿重复申请");
+        }
+        // Hash password if provided
+        if (merchant.getPassword() != null && !merchant.getPassword().isBlank()) {
+            merchant.setPassword(BCrypt.hashpw(merchant.getPassword(), BCrypt.gensalt()));
         }
         merchant.setId(null);
         merchant.setStatus(MerchantStatus.PENDING);

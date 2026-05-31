@@ -6,7 +6,9 @@ import com.waimai.common.constant.RiderAuditStatus;
 import com.waimai.common.constant.RiderStatus;
 import com.waimai.common.entity.*;
 import com.waimai.common.exception.BusinessException;
+import com.waimai.common.utils.BCryptUtil;
 import com.waimai.service.mapper.DeliveryTrackMapper;
+import org.mindrot.jbcrypt.BCrypt;
 import com.waimai.service.mapper.OrderMapper;
 import com.waimai.service.mapper.RiderMapper;
 import com.waimai.service.service.RiderService;
@@ -42,10 +44,31 @@ public class RiderServiceImpl extends ServiceImpl<RiderMapper, Rider> implements
     }
 
     @Override
+    public Rider getByPhone(String phone) {
+        return lambdaQuery().eq(Rider::getPhone, phone).one();
+    }
+
+    @Override
+    public Rider loginByPassword(String phone, String password) {
+        Rider rider = getByPhone(phone);
+        if (rider == null) {
+            throw new BusinessException("手机号未注册，请先注册成为骑手");
+        }
+        if (rider.getPassword() == null || !BCryptUtil.checkPassword(password, rider.getPassword())) {
+            throw new BusinessException("密码错误");
+        }
+        return rider;
+    }
+
+    @Override
     public void register(Rider rider) {
         Rider exist = getByOpenid(rider.getOpenid());
         if (exist != null && exist.getAuditStatus() != RiderAuditStatus.REJECTED) {
             throw new BusinessException("您已申请过，请勿重复申请");
+        }
+        // Hash password if provided
+        if (rider.getPassword() != null && !rider.getPassword().isBlank()) {
+            rider.setPassword(BCrypt.hashpw(rider.getPassword(), BCrypt.gensalt()));
         }
         if (exist != null && exist.getAuditStatus() == RiderAuditStatus.REJECTED) {
             // Re-apply: update existing record

@@ -1,10 +1,10 @@
 package com.waimai.api.controller;
 
+import com.waimai.api.annotation.RateLimit;
 import com.waimai.common.Result;
 import com.waimai.common.constant.MerchantStatus;
 import com.waimai.common.constant.RiderAuditStatus;
-import com.waimai.common.dto.LoginDTO;
-import com.waimai.common.dto.RiderRegisterDTO;
+import com.waimai.common.dto.*;
 import com.waimai.common.entity.Merchant;
 import com.waimai.common.entity.Rider;
 import com.waimai.common.entity.User;
@@ -98,6 +98,7 @@ public class AuthController {
         rider.setRealName(dto.getRealName());
         rider.setIdCard(dto.getIdCard());
         rider.setPhone(dto.getPhone());
+        rider.setPassword(dto.getPassword());
         rider.setAvatar(dto.getAvatar());
         riderService.register(rider);
 
@@ -125,6 +126,50 @@ public class AuthController {
             result.put("phone", rider.getPhone());
         }
         return Result.ok(result);
+    }
+
+    // ── Password-based auth endpoints ──────────────────────────────
+
+    @RateLimit(maxRequests = 3, windowSeconds = 60)
+    @PostMapping("/send-code")
+    public Result<?> sendCode(@Valid @RequestBody SendCodeDTO dto) {
+        userService.sendSmsCode(dto.getPhone());
+        return Result.ok();
+    }
+
+    @PostMapping("/register/user")
+    public Result<LoginVO> registerUser(@Valid @RequestBody UserRegisterDTO dto) {
+        if (!userService.verifySmsCode(dto.getPhone(), dto.getCode())) {
+            return Result.fail(400, "验证码错误或已过期");
+        }
+        User user = userService.registerByPassword(dto.getPhone(), dto.getPassword(), dto.getNickname());
+        String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getOpenid());
+        String refreshToken = jwtUtil.generateRefreshToken(user.getId(), user.getOpenid());
+        return Result.ok(new LoginVO(accessToken, refreshToken, user.getId(), user.getNickname(), user.getAvatar()));
+    }
+
+    @PostMapping("/login/user")
+    public Result<LoginVO> userLogin(@Valid @RequestBody PasswordLoginDTO dto) {
+        User user = userService.loginByPassword(dto.getPhone(), dto.getPassword());
+        String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getOpenid());
+        String refreshToken = jwtUtil.generateRefreshToken(user.getId(), user.getOpenid());
+        return Result.ok(new LoginVO(accessToken, refreshToken, user.getId(), user.getNickname(), user.getAvatar()));
+    }
+
+    @PostMapping("/login/merchant")
+    public Result<LoginVO> merchantPasswordLogin(@Valid @RequestBody PasswordLoginDTO dto) {
+        Merchant merchant = merchantService.loginByPassword(dto.getPhone(), dto.getPassword());
+        String accessToken = jwtUtil.generateAccessToken(merchant.getId(), merchant.getOpenid());
+        String refreshToken = jwtUtil.generateRefreshToken(merchant.getId(), merchant.getOpenid());
+        return Result.ok(new LoginVO(accessToken, refreshToken, merchant.getId(), merchant.getName(), merchant.getLogo()));
+    }
+
+    @PostMapping("/login/rider")
+    public Result<LoginVO> riderPasswordLogin(@Valid @RequestBody PasswordLoginDTO dto) {
+        Rider rider = riderService.loginByPassword(dto.getPhone(), dto.getPassword());
+        String accessToken = jwtUtil.generateAccessToken(rider.getId(), rider.getOpenid());
+        String refreshToken = jwtUtil.generateRefreshToken(rider.getId(), rider.getOpenid());
+        return Result.ok(new LoginVO(accessToken, refreshToken, rider.getId(), rider.getRealName(), rider.getAvatar()));
     }
 
     @PostMapping("/login/admin")
